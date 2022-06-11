@@ -3,6 +3,7 @@ const util = require('util');
 const ora = require('ora');
 const downloadGitRepo = require('download-git-repo');
 const dictionary = require('./dictionary');
+const { loading } = require('./util');
 
 class Creator {
   constructor(name, target) {
@@ -13,13 +14,7 @@ class Creator {
 
   async create() {
     const repo = await this.getRepoInfo();
-    const spinner = ora('downloading the template, Please wait 😘😘');
-    spinner.start();
-    this.downloadGitRepo(repo, this.target).then(() => {
-      spinner.succeed('download compeleted!')
-    }).catch(() => {
-      spinner.fail('download error! Please try again')
-    })
+    loading({}, this, this.downloadGitRepo, repo, this.target);
   }
 
   async getRepoInfo() {
