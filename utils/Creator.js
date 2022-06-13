@@ -2,6 +2,7 @@ const Inquirer = require("inquirer");
 const util = require('util');
 const ora = require('ora');
 const downloadGitRepo = require('download-git-repo');
+const chalk = require('chalk');
 const dictionary = require('./dictionary');
 const { loading } = require('./util');
 
@@ -14,7 +15,11 @@ class Creator {
 
   async create() {
     const repo = await this.getRepoInfo();
-    loading({}, this, this.downloadGitRepo, repo, this.target);
+    await loading({}, this, this.downloadGitRepo, repo, this.target);
+    console.log(`\nSuccessfully created project ${this.name}`);
+    console.log('\n  cd  ' + chalk.blue(this.name));
+    console.log('  npm install');
+    console.log('  npm run serve\n');
   }
 
   async getRepoInfo() {
