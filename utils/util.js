@@ -8,6 +8,7 @@ const ora = require('ora');
  * @param {string} msg.fail
  * @param {*} context
  * @param {*} fn 加载执行的异步函数
+ * @param {*} successFn 成功回调
  * @param  {...any} res 执行异步函数需要的参数
  */
 async function loading(
@@ -18,6 +19,7 @@ async function loading(
   },
   context,
   fn,
+  successFn,
   ...res
 ) {
   const spinner = ora(start);
@@ -25,6 +27,7 @@ async function loading(
   try {
     await fn.apply(context, res);
     spinner.succeed(succeed);
+    successFn()
   } catch (error) {
     spinner.fail(fail);
   }

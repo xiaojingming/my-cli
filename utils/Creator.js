@@ -15,11 +15,12 @@ class Creator {
 
   async create() {
     const repo = await this.getRepoInfo();
-    await loading({}, this, this.downloadGitRepo, repo, this.target);
-    console.log(`\nSuccessfully created project ${this.name}`);
-    console.log('\n  cd  ' + chalk.blue(this.name));
-    console.log('  npm install');
-    console.log('  npm run serve\n');
+    await loading({}, this, this.downloadGitRepo, () => {
+      console.log(`\nSuccessfully created project ${this.name}`);
+      console.log('\n  cd  ' + chalk.blue(this.name));
+      console.log('  npm install');
+      console.log('  npm run serve\n');
+    }, repo, this.target);    
   }
 
   async getRepoInfo() {

@@ -1,6 +1,6 @@
 {
-  "name": "wowo-cli",
-  "version": "1.0.0",
+  "name": "panel-cli",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
